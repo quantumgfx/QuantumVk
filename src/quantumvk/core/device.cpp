@@ -2,7 +2,7 @@
 
 namespace vkq
 {
-    explicit Device::Device(Device::Impl* impl)
+    Device::Device(Device::Impl* impl)
         : impl(impl)
     {
     }
@@ -64,7 +64,7 @@ namespace vkq
         impl = nullptr;
     }
 
-    void Device::allocateCommandBuffers(vk::CommandPool commandPool, uint32_t commandBufferCount, vk::CommandBuffer* commandBuffers, vk::CommandBufferLevel level, const VkNextProxy<vk::CommandBufferAllocateInfo>& next = {}) const
+    void Device::allocateCommandBuffers(vk::CommandPool commandPool, uint32_t commandBufferCount, vk::CommandBuffer* commandBuffers, vk::CommandBufferLevel level, const VkNextProxy<vk::CommandBufferAllocateInfo>& next) const
     {
         vk::CommandBufferAllocateInfo allocInfo{};
         allocInfo.pNext = next;

@@ -130,7 +130,6 @@ namespace vkq
                     throw std::runtime_error("Extension is enabled but not available");
         }
 
-        vk::InstanceCreateInfo createInfo{};
         createInfo.pApplicationInfo = &appInfo;
         createInfo.setPApplicationInfo(&appInfo);
         createInfo.setPEnabledLayerNames(layers);

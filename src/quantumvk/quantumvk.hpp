@@ -2,8 +2,8 @@
 
 #include "core/loader.hpp"
 #include "core/instance.hpp"
-#include "core/physicalDevice.hpp"
+#include "core/physical_device.hpp"
 
-#include "factory/debugFactory.hpp"
-#include "factory/instanceFactory.hpp"
-#include "factory/physicalDeviceSelector.hpp"
+#include "factory/debug_factory.hpp"
+#include "factory/instance_factory.hpp"
+#include "factory/physical_device_selector.hpp"

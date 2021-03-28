@@ -2,7 +2,7 @@
 
 namespace vkq
 {
-    explicit QueueFamily::QueueFamily(Device device_, uint32_t queueFamilyIndex_)
+    QueueFamily::QueueFamily(Device device_, uint32_t queueFamilyIndex_)
         : device_(device_), queueFamilyIndex_(queueFamilyIndex_)
     {
     }

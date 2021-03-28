@@ -26,7 +26,7 @@ namespace vkq
         commandPool.freeCommandBuffers({commandBuffers.size(), commandPool.impl_->tempCommandStorage.data()});
     }
 
-    explicit CommandPool::CommandPool(CommandPool::Impl* impl_)
+    CommandPool::CommandPool(CommandPool::Impl* impl_)
         : impl_(impl_)
     {
     }

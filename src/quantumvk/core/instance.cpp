@@ -8,7 +8,7 @@ namespace vkq
     // Instance ////////////////////
     ////////////////////////////////
 
-    explicit Instance::Instance(Instance::Impl* impl_)
+    Instance::Instance(Instance::Impl* impl_)
         : impl_(impl_)
     {
     }

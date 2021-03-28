@@ -251,18 +251,7 @@ namespace vkq
         operator vk::Buffer() const;
 
     public:
-        struct Impl
-        {
-            MemoryAllocator allocator;
-            VmaAllocation allocation;
-            vk::Buffer buffer;
-
-            vk::DeviceSize size;
-            vk::BufferUsageFlags usage;
-
-            void* hostMemory;
-            uint32_t memoryTypeIndex;
-        };
+        struct Impl;
 
     private:
         explicit Buffer(Impl* impl);
@@ -399,24 +388,7 @@ namespace vkq
         operator vk::Image() const;
 
     public:
-        struct Impl
-        {
-            MemoryAllocator allocator;
-            VmaAllocation allocation;
-            vk::Image image;
-
-            vk::ImageType imageType;
-            vk::Format format;
-            vk::Extent3D extent;
-            uint32_t mipLevels;
-            uint32_t arrayLayers;
-            vk::SampleCountFlagBits samples;
-            vk::ImageTiling tiling;
-            vk::ImageUsageFlags usage;
-
-            void* hostMemory;
-            uint32_t memoryTypeIndex;
-        };
+        struct Impl;
 
     private:
         explicit Image(Impl* impl);
@@ -511,7 +483,7 @@ namespace vkq
 
         void destroy();
 
-        MemoryAllocator allocator() const { allocator_; }
+        MemoryAllocator allocator() const { return allocator_; }
 
         VmaPool vmaPool() const { return pool_; }
         VmaPool vmaHandle() const { return pool_; }

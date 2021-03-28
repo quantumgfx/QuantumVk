@@ -2,7 +2,7 @@
 
 namespace vkq
 {
-    explicit PhysicalDevice::PhysicalDevice(Instance instance_, vk::PhysicalDevice phdev_)
+    PhysicalDevice::PhysicalDevice(Instance instance_, vk::PhysicalDevice phdev_)
         : instance_(instance_), phdev_(phdev_)
     {
     }
@@ -18,7 +18,7 @@ namespace vkq
         phdev_ = nullptr;
     }
 
-    std::vector<vk::ExtensionProperties> PhysicalDevice::enumerateDeviceExtensionProperties(vk::Optional<const std::string> layerName = nullptr)
+    std::vector<vk::ExtensionProperties> PhysicalDevice::enumerateDeviceExtensionProperties(vk::Optional<const std::string> layerName)
     {
         return phdev_.enumerateDeviceExtensionProperties(layerName, instance_.dispatch());
     }

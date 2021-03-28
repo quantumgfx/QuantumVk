@@ -10,7 +10,20 @@ namespace vkq
     // Buffer /////////////////////////
     ///////////////////////////////////
 
-    explicit Buffer::Buffer(Buffer::Impl* impl)
+    struct Buffer::Impl
+    {
+        MemoryAllocator allocator;
+        VmaAllocation allocation;
+        vk::Buffer buffer;
+
+        vk::DeviceSize size;
+        vk::BufferUsageFlags usage;
+
+        void* hostMemory;
+        uint32_t memoryTypeIndex;
+    };
+
+    Buffer::Buffer(Buffer::Impl* impl)
         : impl(impl)
     {
     }
@@ -114,7 +127,7 @@ namespace vkq
             vmaAllocFlags |= VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT;
 
         VmaAllocationCreateInfo allocInfo{};
-        allocInfo.pool = VMA_NULL;
+        allocInfo.pool = nullptr;
         allocInfo.pUserData = nullptr;
         allocInfo.flags = vmaAllocFlags;
         allocInfo.usage = VMA_MEMORY_USAGE_UNKNOWN;
@@ -218,7 +231,26 @@ namespace vkq
     // Image //////////////////////////
     ///////////////////////////////////
 
-    explicit Image::Image(Image::Impl* impl)
+    struct Image::Impl
+    {
+        MemoryAllocator allocator;
+        VmaAllocation allocation;
+        vk::Image image;
+
+        vk::ImageType imageType;
+        vk::Format format;
+        vk::Extent3D extent;
+        uint32_t mipLevels;
+        uint32_t arrayLayers;
+        vk::SampleCountFlagBits samples;
+        vk::ImageTiling tiling;
+        vk::ImageUsageFlags usage;
+
+        void* hostMemory;
+        uint32_t memoryTypeIndex;
+    };
+
+    Image::Image(Image::Impl* impl)
         : impl(impl)
     {
     }
@@ -340,7 +372,7 @@ namespace vkq
             vmaAllocFlags |= VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT;
 
         VmaAllocationCreateInfo allocInfo{};
-        allocInfo.pool = VMA_NULL;
+        allocInfo.pool = nullptr;
         allocInfo.pUserData = nullptr;
         allocInfo.flags = vmaAllocFlags;
         allocInfo.usage = VMA_MEMORY_USAGE_UNKNOWN;
@@ -469,7 +501,7 @@ namespace vkq
     // Memory Allocator ///////////////
     ///////////////////////////////////
 
-    explicit MemoryAllocator::MemoryAllocator(MemoryAllocator::Impl* impl)
+    MemoryAllocator::MemoryAllocator(MemoryAllocator::Impl* impl)
         : impl(impl)
     {
     }
@@ -613,12 +645,12 @@ namespace vkq
     // Memory Pools //////////////////
     //////////////////////////////////
 
-    explicit MemoryPool::MemoryPool(MemoryAllocator allocator, VmaPool pool)
+    MemoryPool::MemoryPool(MemoryAllocator allocator, VmaPool pool)
         : allocator_(allocator), pool_(pool)
     {
     }
 
-    MemoryPool MemoryPool::create(const MemoryAllocator& allocator, MemoryPoolAlgorithm algorithm, uint32_t memoryTypeIndex, vk::DeviceSize blockSize = 0, uint32_t minBlockCount = 0, uint32_t maxBlockCount = 0)
+    MemoryPool MemoryPool::create(const MemoryAllocator& allocator, MemoryPoolAlgorithm algorithm, uint32_t memoryTypeIndex, vk::DeviceSize blockSize, uint32_t minBlockCount, uint32_t maxBlockCount)
     {
         VmaPoolCreateFlags flags = 0;
         if (algorithm == MemoryPoolAlgorithm::eBuddy)
@@ -650,7 +682,7 @@ namespace vkq
     // Linear Memory Pool /////////
     ///////////////////////////////
 
-    explicit LinearMemoryPool::LinearMemoryPool(MemoryAllocator allocator, VmaPool pool)
+    LinearMemoryPool::LinearMemoryPool(MemoryAllocator allocator, VmaPool pool)
         : allocator_(allocator), pool_(pool)
     {
     }

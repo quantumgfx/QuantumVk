@@ -137,7 +137,7 @@ namespace vkq
 
         vk::Queue getQueue2(const vk::DeviceQueueInfo2& queueInfo) const
         {
-            vkDevice().getQueue2(queueInfo, dispatch());
+            return vkDevice().getQueue2(queueInfo, dispatch());
         }
 
 #endif

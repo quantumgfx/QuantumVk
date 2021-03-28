@@ -45,7 +45,7 @@ namespace vkq
         ~ObjectPool()
         {
             for (size_t i = m_ItemBlocks.size(); i--;)
-                std::free(m_ItemBlocks[i].pItems, m_ItemBlocks[i].capacity);
+                std::free(m_ItemBlocks[i].pItems); //m_ItemBlocks[i].capacity
             m_ItemBlocks.clear();
         }
 
@@ -105,7 +105,7 @@ namespace vkq
 
             ItemBlock newBlock;
             newBlock.capacity = newBlockCapacity;
-            newBlock.pItems = std::malloc(sizeof(Item) * newBlockCapacity);
+            newBlock.pItems = (Item*)std::malloc(sizeof(Item) * newBlockCapacity);
             newBlock.firstFreeIndex = 0;
 
             m_ItemBlocks.push_back(newBlock);

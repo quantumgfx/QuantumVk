@@ -43,19 +43,16 @@ option(QM_VULKAN_MT "Make QuantumVk thread-safe." ON)
 # ------------------------------
 
 add_subdirectory(extern/SPIRV-Cross)
-add_subdirectory(extern/Vulkan-Headers)
 
-# Use FindVulkan module added with CMAKE 3.7
-# message(STATUS "Using module to find Vulkan")
-# find_package(Vulkan)
+find_package(Vulkan REQUIRED)
 
-# QuantumVk Library
 add_library(quantumvk STATIC)
 
-target_link_libraries(quantumvk PUBLIC Vulkan-Headers)
-target_link_libraries(quantumvk PUBLIC spirv-cross-core)
-target_include_directories(quantumvk PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/extern/VulkanMemoryAllocator/src)
+target_include_directories(quantumvk PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
+target_include_directories(quantumvk PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/extern/VulkanMemoryAllocator/src)
+target_include_directories(quantumvk PUBLIC ${Vulkan_INCLUDE_DIR})
+target_link_libraries(quantumvk PUBLIC spirv-cross-core)
 
 set(QM_SRC_DIR src/quantumvk)
 

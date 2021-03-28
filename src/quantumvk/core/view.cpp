@@ -3,12 +3,12 @@
 namespace vkq
 {
 
-    explicit BufferView::BufferView(Buffer buffer, vk::BufferView view)
+    BufferView::BufferView(Buffer buffer, vk::BufferView view)
         : buffer_(buffer), view_(view)
     {
     }
 
-    BufferView BufferView::create(const Buffer& buffer, vk::Format format, vk::DeviceSize offset, vk::DeviceSize range, vk::BufferViewCreateFlags flags = {}, VkNextProxy<vk::BufferViewCreateInfo> next = nullptr)
+    BufferView BufferView::create(const Buffer& buffer, vk::Format format, vk::DeviceSize offset, vk::DeviceSize range, vk::BufferViewCreateFlags flags, VkNextProxy<vk::BufferViewCreateInfo> next)
     {
         vk::BufferViewCreateInfo createInfo{};
         createInfo.pNext = next;
@@ -34,12 +34,12 @@ namespace vkq
         view_ = nullptr;
     }
 
-    explicit ImageView::ImageView(Image image, vk::ImageView view)
+    ImageView::ImageView(Image image, vk::ImageView view)
         : image_(image), view_(view)
     {
     }
 
-    ImageView ImageView::create(const Image& image, vk::ImageViewType viewType, vk::Format format, vk::ImageSubresourceRange subresourceRange, VkComponentMapping components, vk::ImageViewCreateFlags flags, VkNextProxy<vk::ImageViewCreateInfo> next = nullptr)
+    ImageView ImageView::create(const Image& image, vk::ImageViewType viewType, vk::Format format, vk::ImageSubresourceRange subresourceRange, VkComponentMapping components, vk::ImageViewCreateFlags flags, VkNextProxy<vk::ImageViewCreateInfo> next)
     {
         vk::ImageViewCreateInfo createInfo{};
         createInfo.pNext = next;

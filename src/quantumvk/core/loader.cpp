@@ -2,7 +2,7 @@
 
 namespace vkq
 {
-    explicit Loader::Loader(Loader::Impl* impl_)
+    Loader::Loader(Loader::Impl* impl_)
         : impl_(impl_)
     {
     }

@@ -116,7 +116,7 @@ namespace vkq
         {
             // Requirements involving physicalDeviceProps
             {
-                vk::PhysicalDeviceProperties props = candidate.getProperties(instance.getInstanceDispatch());
+                vk::PhysicalDeviceProperties props = candidate.getProperties(instance.dispatch());
 
                 // Physical Device must support minimum requested version of vulkan
                 if (props.apiVersion < minimumVersion)
@@ -138,7 +138,7 @@ namespace vkq
             // Requirements involving quried extensions
             {
                 // Physical Device must support all required extensions
-                std::vector<vk::ExtensionProperties> queriedExtensions = candidate.enumerateDeviceExtensionProperties(nullptr, instance.getInstanceDispatch());
+                std::vector<vk::ExtensionProperties> queriedExtensions = candidate.enumerateDeviceExtensionProperties(nullptr, instance.dispatch());
 
                 bool extensionsSupported = true;
 
@@ -151,7 +151,7 @@ namespace vkq
 
             // Queue requirements
             {
-                std::vector<vk::QueueFamilyProperties> queueProps = candidate.getQueueFamilyProperties(instance.getInstanceDispatch());
+                std::vector<vk::QueueFamilyProperties> queueProps = candidate.getQueueFamilyProperties(instance.dispatch());
 
 #ifdef VK_KHR_SURFACE_EXTENSION_NAME
                 // If requested, surface presentation must be supported by physical device
@@ -159,7 +159,7 @@ namespace vkq
 
                 if (static_cast<bool>(presentSurface))
                     for (uint32_t queueFamilyIndex = 0; queueFamilyIndex < queueProps.size(); queueFamilyIndex++)
-                        surfaceSupported = surfaceSupported && (VK_TRUE == candidate.getSurfaceSupportKHR(queueFamilyIndex, presentSurface, instance.getInstanceDispatch()));
+                        surfaceSupported = surfaceSupported && (VK_TRUE == candidate.getSurfaceSupportKHR(queueFamilyIndex, presentSurface, instance.dispatch()));
 
                 if (presentSupportRequired && !surfaceSupported)
                     continue;
@@ -187,7 +187,7 @@ namespace vkq
 
             // Preferences involving physicalDeviceProperties
             {
-                vk::PhysicalDeviceProperties props = candidate.getProperties(instance.getInstanceDispatch());
+                vk::PhysicalDeviceProperties props = candidate.getProperties(instance.dispatch());
 
                 if (props.apiVersion >= desiredVersion)
                     candidateWeight += desiredVersionWeight;
@@ -204,7 +204,7 @@ namespace vkq
 
             // Prefernces involving extensions
             {
-                std::vector<vk::ExtensionProperties> queriedExtensions = candidate.enumerateDeviceExtensionProperties(nullptr, instance.getInstanceDispatch());
+                std::vector<vk::ExtensionProperties> queriedExtensions = candidate.enumerateDeviceExtensionProperties(nullptr, instance.dispatch());
 
                 for (auto extension : requestedExtensions)
                     if (checkDeviceExtensionSupported(queriedExtensions, extension.first))
