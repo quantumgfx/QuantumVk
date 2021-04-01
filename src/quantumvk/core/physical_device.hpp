@@ -23,12 +23,20 @@ namespace vkq
         void reset();
 
         vk::PhysicalDeviceProperties getProperties();
+        vk::PhysicalDeviceFeatures getFeatures();
         std::vector<vk::QueueFamilyProperties> getQueueFamilyProperties();
         std::vector<vk::ExtensionProperties> enumerateDeviceExtensionProperties(vk::Optional<const std::string> layerName = nullptr);
 
 #ifdef VK_KHR_SURFACE_EXTENSION_NAME
         vk::Bool32 getSurfaceSupportKHR(uint32_t queueFamilyIndex, vk::SurfaceKHR surface);
 #endif
+
+#ifdef VK_VERSION_1_1
+        
+
+        void getFeatures2(vk::PhysicalDeviceFeatures2* features);
+#endif 
+
 
         Instance instance() const
         {

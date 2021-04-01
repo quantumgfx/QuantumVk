@@ -28,6 +28,11 @@ namespace vkq
         return phdev_.getProperties(instance_.dispatch());
     }
 
+    vk::PhysicalDeviceFeatures PhysicalDevice::getFeatures()
+    {
+        return phdev_.getFeatures(instance_.dispatch());
+    }
+
     std::vector<vk::QueueFamilyProperties> PhysicalDevice::getQueueFamilyProperties()
     {
         return phdev_.getQueueFamilyProperties(instance_.dispatch());
@@ -38,5 +43,14 @@ namespace vkq
     {
         return phdev_.getSurfaceSupportKHR(queueFamilyIndex, surface, instance_.dispatch());
     }
+#endif
+
+#ifdef VK_VERSION_1_1
+
+    void PhysicalDevice::getFeatures2(vk::PhysicalDeviceFeatures2* features)
+    {
+        phdev_.getFeatures2(features, instance_.dispatch());
+    }
+
 #endif
 }
