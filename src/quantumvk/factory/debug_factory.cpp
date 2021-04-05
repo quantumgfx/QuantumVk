@@ -16,6 +16,6 @@ namespace vkq
         createInfo.pUserData = nullptr;
         createInfo.pfnUserCallback = messengerCallback;
 
-        return instance.createDebugUtilsMessengerEXT(createInfo);
+        return instance.vkInstance().createDebugUtilsMessengerEXT(createInfo, nullptr, instance.dispatch());
     }
 } // namespace vkq

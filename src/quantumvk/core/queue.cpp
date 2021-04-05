@@ -30,7 +30,13 @@ namespace vkq
 
     Queue Queue::create2(const Device& device, const vk::DeviceQueueInfo2& queueInfo)
     {
-        return Queue{device, device.getQueue2(queueInfo)};
+        return Queue{device, device.vkHandle().getQueue2(queueInfo, device.dispatch())};
+    }
+
+    void Queue::reset()
+    {
+        device_ = {};
+        queue_ = {};
     }
 
 } // namespace vkq

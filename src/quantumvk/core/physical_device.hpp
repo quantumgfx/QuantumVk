@@ -27,13 +27,7 @@ namespace vkq
         std::vector<vk::QueueFamilyProperties> getQueueFamilyProperties();
         std::vector<vk::ExtensionProperties> enumerateDeviceExtensionProperties(vk::Optional<const std::string> layerName = nullptr);
 
-#ifdef VK_KHR_SURFACE_EXTENSION_NAME
-        vk::Bool32 getSurfaceSupportKHR(uint32_t queueFamilyIndex, vk::SurfaceKHR surface);
-#endif
-
 #ifdef VK_VERSION_1_1
-        
-
         void getFeatures2(vk::PhysicalDeviceFeatures2* features);
 #endif 
 
@@ -41,6 +35,11 @@ namespace vkq
         Instance instance() const
         {
             return instance_;
+        }
+
+        vk::DispatchLoaderDynamic dispatch() const
+        {
+            return instance_.dispatch();
         }
 
         vk::PhysicalDevice vkPhysicalDevice() const

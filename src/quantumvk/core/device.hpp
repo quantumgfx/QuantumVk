@@ -124,36 +124,14 @@ namespace vkq
             vkDevice().resetCommandPool(commandPool, flags, dispatch());
         }
 
+        void waitIdle() const
+        {
+            vkDevice().waitIdle(dispatch());
+        }
+
         ////////////////////////////////
         // Version 1.1 /////////////////
         ////////////////////////////////
-
-#ifdef VK_VERSION_1_1
-
-        void trimCommandPool(vk::CommandPool commandPool, vk::CommandPoolTrimFlags flags = {}) const
-        {
-            vkDevice().trimCommandPool(commandPool, flags, dispatch());
-        }
-
-        vk::Queue getQueue2(const vk::DeviceQueueInfo2& queueInfo) const
-        {
-            return vkDevice().getQueue2(queueInfo, dispatch());
-        }
-
-#endif
-
-        ///////////////////////////////
-        // Extenstions ////////////////
-        ///////////////////////////////
-
-#ifdef VK_KHR_MAINTENANCE1_EXTENSION_NAME
-
-        void trimCommandPoolKHR(vk::CommandPool commandPool, vk::CommandPoolTrimFlagsKHR flags = {}) const
-        {
-            vkDevice().trimCommandPoolKHR(commandPool, flags, dispatch());
-        }
-
-#endif
 
         ///////////////////////////////
         // Helper Functions ///////////

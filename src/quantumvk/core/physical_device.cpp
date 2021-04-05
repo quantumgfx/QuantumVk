@@ -38,13 +38,6 @@ namespace vkq
         return phdev_.getQueueFamilyProperties(instance_.dispatch());
     }
 
-#ifdef VK_KHR_SURFACE_EXTENSION_NAME
-    vk::Bool32 PhysicalDevice::getSurfaceSupportKHR(uint32_t queueFamilyIndex, vk::SurfaceKHR surface)
-    {
-        return phdev_.getSurfaceSupportKHR(queueFamilyIndex, surface, instance_.dispatch());
-    }
-#endif
-
 #ifdef VK_VERSION_1_1
 
     void PhysicalDevice::getFeatures2(vk::PhysicalDeviceFeatures2* features)
