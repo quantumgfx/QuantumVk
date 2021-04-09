@@ -31,6 +31,15 @@ namespace vkq
         void getFeatures2(vk::PhysicalDeviceFeatures2* features);
 #endif 
 
+#ifdef VK_KHR_SURFACE_EXTENSION_NAME
+
+        std::vector<vk::SurfaceFormatKHR> getSurfaceFormatsKHR(vk::SurfaceKHR surface);
+
+        vk::SurfaceCapabilitiesKHR getSurfaceCapabilitiesKHR(vk::SurfaceKHR surface);
+
+        std::vector<vk::PresentModeKHR> getSurfacePresentModes(vk::SurfaceKHR surface);
+#endif
+
 
         Instance instance() const
         {

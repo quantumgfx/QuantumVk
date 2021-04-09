@@ -46,4 +46,24 @@ namespace vkq
     }
 
 #endif
+
+#ifdef VK_KHR_SURFACE_EXTENSION_NAME
+
+    std::vector<vk::SurfaceFormatKHR> PhysicalDevice::getSurfaceFormatsKHR(vk::SurfaceKHR surface)
+    {
+        return phdev_.getSurfaceFormatsKHR(surface, instance_.dispatch());
+    }
+
+    vk::SurfaceCapabilitiesKHR PhysicalDevice::getSurfaceCapabilitiesKHR(vk::SurfaceKHR surface)
+    {
+        return phdev_.getSurfaceCapabilitiesKHR(surface, instance_.dispatch());
+    }
+
+    std::vector<vk::PresentModeKHR> PhysicalDevice::getSurfacePresentModes(vk::SurfaceKHR surface)
+    {
+        return phdev_.getSurfacePresentModesKHR(surface, instance_.dispatch());
+    }
+
+#endif
+
 }

@@ -89,9 +89,19 @@ namespace vkq
             return vkDevice().createCommandPool(createInfo, nullptr, dispatch());
         }
 
+        vk::Fence createFence(const vk::FenceCreateInfo& createInfo) const
+        {
+            return vkDevice().createFence(createInfo, nullptr, dispatch());
+        }
+
         vk::ImageView createImageView(const vk::ImageViewCreateInfo& createInfo) const
         {
             return vkDevice().createImageView(createInfo, nullptr, dispatch());
+        }
+
+        vk::Semaphore createSemaphore(const vk::SemaphoreCreateInfo& createInfo) const
+        {
+            return vkDevice().createSemaphore(createInfo, nullptr, dispatch());
         }
 
         void destroyBufferView(vk::BufferView bufferView)
@@ -104,9 +114,19 @@ namespace vkq
             vkDevice().destroyCommandPool(commandPool, nullptr, dispatch());
         }
 
+        void destroyFence(vk::Fence fence) const
+        {
+            return vkDevice().destroyFence(fence, nullptr, dispatch());
+        }
+
         void destroyImageView(vk::ImageView imageView) const
         {
             return vkDevice().destroyImageView(imageView, nullptr, dispatch());
+        }
+
+        void destroySemaphore(vk::Semaphore semaphore) const
+        {
+            return vkDevice().destroySemaphore(semaphore, nullptr, dispatch());
         }
 
         void freeCommandBuffers(vk::CommandPool commandPool, const vk::ArrayProxy<const vk::CommandBuffer>& commandBuffers) const
@@ -132,6 +152,27 @@ namespace vkq
         ////////////////////////////////
         // Version 1.1 /////////////////
         ////////////////////////////////
+
+#ifdef VK_KHR_SWAPCHAIN_EXTENSION_NAME
+
+        vk::SwapchainKHR createSwapchainKHR(const vk::SwapchainCreateInfoKHR& createInfo)
+        {
+            return vkDevice().createSwapchainKHR(createInfo, nullptr, dispatch());
+        }
+
+        void destroySwapchainKHR(vk::SwapchainKHR swapchain)
+        {
+            vkDevice().destroySwapchainKHR(swapchain, nullptr, dispatch());
+        }
+
+        uint32_t getSwapchainImageCountKHR(vk::SwapchainKHR swapchain)
+        {
+            uint32_t imageCount = 0;
+            vkDevice().getSwapchainImagesKHR(swapchain, &imageCount, nullptr, dispatch());
+            return imageCount;
+        }
+#endif
+
 
         ///////////////////////////////
         // Helper Functions ///////////
