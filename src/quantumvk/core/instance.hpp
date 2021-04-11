@@ -59,11 +59,17 @@ namespace vkq
 
 #endif
 
+#ifdef VK_KHR_SURFACE_EXTENSION_NAME
+
+        void destroySurfaceKHR(vk::SurfaceKHR surface);
+#endif
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 #ifdef VK_KHR_WIN32_SURFACE_EXTENSION_NAME
         vk::SurfaceKHR createWin32SurfaceKHR(const vk::Win32SurfaceCreateInfoKHR& createInfo);
 #endif
 #endif
+
 
         std::vector<vk::PhysicalDevice> enumeratePhysicalDevices() const;
 

@@ -65,6 +65,15 @@ namespace vkq
 
 #endif
 
+#ifdef VK_KHR_SURFACE_EXTENSION_NAME
+
+    void Instance::destroySurfaceKHR(vk::SurfaceKHR surface)
+    {
+        impl_->instance.destroySurfaceKHR(surface);
+    }
+
+#endif
+
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 #ifdef VK_KHR_WIN32_SURFACE_EXTENSION_NAME
 
