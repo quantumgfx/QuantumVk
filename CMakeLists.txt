@@ -73,7 +73,8 @@ set(QM_CORE_HPP_FILES
 	${QM_SRC_DIR}/core/commands.hpp
 	${QM_SRC_DIR}/core/memory.hpp
 	${QM_SRC_DIR}/core/pipeline.hpp
-	${QM_SRC_DIR}/core/view.hpp)
+	${QM_SRC_DIR}/core/view.hpp
+	${QM_SRC_DIR}/core/swapchain.hpp)
 
 set(QM_CORE_CPP_FILES 
 	${QM_SRC_DIR}/core/loader.cpp
@@ -84,7 +85,8 @@ set(QM_CORE_CPP_FILES
 	${QM_SRC_DIR}/core/commands.cpp
 	${QM_SRC_DIR}/core/memory.cpp
 	${QM_SRC_DIR}/core/pipeline.cpp
-	${QM_SRC_DIR}/core/view.cpp)
+	${QM_SRC_DIR}/core/view.cpp
+	${QM_SRC_DIR}/core/swapchain.cpp)
 
 set(QM_FACTORY_HPP_FILES
 	${QM_SRC_DIR}/factory/debug_factory.hpp

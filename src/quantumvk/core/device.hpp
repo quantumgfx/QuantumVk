@@ -149,28 +149,46 @@ namespace vkq
             vkDevice().waitIdle(dispatch());
         }
 
+        vk::Result getFenceStatus(vk::Fence fence) const
+        {
+            return vkDevice().getFenceStatus(fence, dispatch());
+        }
+
+        vk::Result waitForFences(const vk::ArrayProxy<const vk::Fence>& fences, vk::Bool32 waitAll, uint64_t timeout) const
+        {
+            return vkDevice().waitForFences(fences, waitAll, timeout, dispatch());
+        }
+
+        void resetFence(const vk::ArrayProxy<const vk::Fence>& fences) const
+        {
+            vkDevice().resetFences(fences, dispatch());
+        }
+
         ////////////////////////////////
         // Version 1.1 /////////////////
         ////////////////////////////////
 
-#ifdef VK_KHR_SWAPCHAIN_EXTENSION_NAME
+        ///////////////////////////////
+        // Version 1.2 ////////////////
+        ///////////////////////////////
 
-        vk::SwapchainKHR createSwapchainKHR(const vk::SwapchainCreateInfoKHR& createInfo)
+
+#ifdef VK_VERSION_1_2
+        uint64_t getSemaphoreCounterValue(vk::Semaphore semaphore)
         {
-            return vkDevice().createSwapchainKHR(createInfo, nullptr, dispatch());
+            return vkDevice().getSemaphoreCounterValue(semaphore, dispatch());
         }
 
-        void destroySwapchainKHR(vk::SwapchainKHR swapchain)
+        void signalSemaphore(const vk::SemaphoreSignalInfo& signalInfo)
         {
-            vkDevice().destroySwapchainKHR(swapchain, nullptr, dispatch());
+            vkDevice().signalSemaphore(signalInfo, dispatch());
         }
 
-        uint32_t getSwapchainImageCountKHR(vk::SwapchainKHR swapchain)
+        vk::Result waitSemaphore(const vk::SemaphoreWaitInfo& waitInfo, uint64_t timeout)
         {
-            uint32_t imageCount = 0;
-            vkDevice().getSwapchainImagesKHR(swapchain, &imageCount, nullptr, dispatch());
-            return imageCount;
+            return vkDevice().waitSemaphores(waitInfo, timeout, dispatch());
         }
+
 #endif
 
 

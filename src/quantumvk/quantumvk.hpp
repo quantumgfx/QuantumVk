@@ -6,6 +6,7 @@
 #include "core/device.hpp"
 #include "core/queue.hpp"
 #include "core/commands.hpp"
+#include "core/swapchain.hpp"
 
 #include "factory/debug_factory.hpp"
 #include "factory/instance_factory.hpp"
